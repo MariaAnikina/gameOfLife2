@@ -9,6 +9,7 @@ public class Game {
 	private int n; // размеры поля
 	private int[][] field;
 	private int[][] nextStepField;
+	private int livingCells = 0;
 
 	public void startGame() {
 		Scanner scanner = new Scanner(System.in);
@@ -89,84 +90,47 @@ public class Game {
 	}
 
 	public void updateCellState(Boolean isAdditionLife) {
-		int livingCells = 0;
+		int fieldSize = n;
 		for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
 					Boolean isLivingCell = field[i][j]==(1);
 					if (isLivingCell.equals(!isAdditionLife)) {
-						int fieldSize = n;
 						if (i > 0 && i < fieldSize - 1) {
 							if (j > 0) {
-								if (field[i - 1][j - 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i][j - 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i + 1][j - 1]==(1)) {
-									livingCells++;
-								}
+								countLiveCells(i - 1, j - 1);
+								countLiveCells(i, j - 1);
+								countLiveCells(i + 1, j - 1);
 							}
-							if (field[i - 1][j]==(1)) {
-								livingCells++;
-							}
-							if (field[i + 1][j]==(1)) {
-								livingCells++;
-							}
+							countLiveCells(i - 1, j);
+							countLiveCells(i + 1, j);
 							if (j < fieldSize - 1) {
-								if (field[i - 1][j + 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i][j + 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i + 1][j + 1]==(1)) {
-									livingCells++;
-								}
+								countLiveCells(i - 1, j + 1);
+								countLiveCells(i, j + 1);
+								countLiveCells(i + 1, j + 1);
 							}
 							createOrDeleteLive(livingCells, isAdditionLife, i, j);
 							livingCells = 0;
 						} else if (i == 0) {
 							if (j  > 0) {
-								if (field[i][j - 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i + 1][j - 1]==(1)) {
-									livingCells++;
-								}
+								countLiveCells(i, j - 1);
+								countLiveCells(i + 1, j - 1);
 							}
-							if (field[i + 1][j]==(1)) {
-								livingCells++;
-							}
+							countLiveCells(i + 1, j);
 							if (j < fieldSize - 1) {
-								if (field[i][j + 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i + 1][j + 1]==(1)) {
-									livingCells++;
-								}
+								countLiveCells(i, j + 1);
+								countLiveCells(i + 1, j + 1);
 							}
 							createOrDeleteLive(livingCells, isAdditionLife, i, j);
 							livingCells = 0;
 						} else {
 							if (j  > 0) {
-								if (field[i - 1][j - 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i][j - 1]==(1)) {
-									livingCells++;
-								}
+								countLiveCells(i - 1, j - 1);
+								countLiveCells(i, j - 1);
 							}
-							if (field[i - 1][j]==(1)) {
-								livingCells++;
-							}
+							countLiveCells(i - 1, j);
 							if (j < fieldSize - 1) {
-								if (field[i - 1][j + 1]==(1)) {
-									livingCells++;
-								}
-								if (field[i][j + 1]==(1)) {
-									livingCells++;
-								}
+								countLiveCells(i - 1, j + 1);
+								countLiveCells(i, j + 1);
 							}
 							createOrDeleteLive(livingCells, isAdditionLife, i, j);
 							livingCells = 0;
@@ -197,5 +161,11 @@ public class Game {
 			System.out.println(" ");
 		}
 		System.out.println(" ");
+	}
+
+	public void countLiveCells(int i, int j) {
+		if (field[i][j] == 1) {
+			livingCells++;
+		}
 	}
 }
