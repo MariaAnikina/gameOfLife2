@@ -92,51 +92,50 @@ public class Game {
 	public void updateCellState(Boolean isAdditionLife) {
 		int fieldSize = n;
 		for (int i = 0; i < n; i++) {
-				for (int j = 0; j < n; j++) {
-					Boolean isLivingCell = field[i][j]==(1);
-					if (isLivingCell.equals(!isAdditionLife)) {
-						if (i > 0 && i < fieldSize - 1) {
-							if (j > 0) {
-								countLiveCells(i - 1, j - 1);
-								countLiveCells(i, j - 1);
-								countLiveCells(i + 1, j - 1);
-							}
-							countLiveCells(i - 1, j);
-							countLiveCells(i + 1, j);
-							if (j < fieldSize - 1) {
-								countLiveCells(i - 1, j + 1);
-								countLiveCells(i, j + 1);
-								countLiveCells(i + 1, j + 1);
-							}
-							createOrDeleteLive(livingCells, isAdditionLife, i, j);
-							livingCells = 0;
-						} else if (i == 0) {
-							if (j  > 0) {
-								countLiveCells(i, j - 1);
-								countLiveCells(i + 1, j - 1);
-							}
-							countLiveCells(i + 1, j);
-							if (j < fieldSize - 1) {
-								countLiveCells(i, j + 1);
-								countLiveCells(i + 1, j + 1);
-							}
-							createOrDeleteLive(livingCells, isAdditionLife, i, j);
-							livingCells = 0;
-						} else {
-							if (j  > 0) {
-								countLiveCells(i - 1, j - 1);
-								countLiveCells(i, j - 1);
-							}
-							countLiveCells(i - 1, j);
-							if (j < fieldSize - 1) {
-								countLiveCells(i - 1, j + 1);
-								countLiveCells(i, j + 1);
-							}
-							createOrDeleteLive(livingCells, isAdditionLife, i, j);
-							livingCells = 0;
+			for (int j = 0; j < n; j++) {
+				Boolean isLivingCell = field[i][j] == (1);
+				if (isLivingCell.equals(!isAdditionLife)) {
+					if (i > 0 && i < fieldSize - 1) {
+						if (j > 0) {
+							countLiveCells(i - 1, j - 1);
+							countLiveCells(i, j - 1);
+							countLiveCells(i + 1, j - 1);
 						}
+						countLiveCells(i - 1, j);
+						countLiveCells(i + 1, j);
+						if (j < fieldSize - 1) {
+							countLiveCells(i - 1, j + 1);
+							countLiveCells(i, j + 1);
+							countLiveCells(i + 1, j + 1);
+						}
+						createOrDeleteLive(livingCells, isAdditionLife, i, j);
+						livingCells = 0;
+					} else if (i == 0) {
+						if (j > 0) {
+							countLiveCells(i, j - 1);
+							countLiveCells(i + 1, j - 1);
+						}
+						countLiveCells(i + 1, j);
+						if (j < fieldSize - 1) {
+							countLiveCells(i, j + 1);
+							countLiveCells(i + 1, j + 1);
+						}
+						createOrDeleteLive(livingCells, isAdditionLife, i, j);
+						livingCells = 0;
+					} else {
+						if (j > 0) {
+							countLiveCells(i - 1, j - 1);
+							countLiveCells(i, j - 1);
+						}
+						countLiveCells(i - 1, j);
+						if (j < fieldSize - 1) {
+							countLiveCells(i - 1, j + 1);
+							countLiveCells(i, j + 1);
+						}
+						createOrDeleteLive(livingCells, isAdditionLife, i, j);
+						livingCells = 0;
 					}
-
+				}
 			}
 		}
 	}
@@ -144,7 +143,8 @@ public class Game {
 	public void createOrDeleteLive(int livingCells, Boolean isAdditionLife, int i, int j) {
 		if (isAdditionLife.equals(false)) {
 			if (livingCells > 3 || livingCells < 2) {
-				nextStepField[i][j] = 0;;
+				nextStepField[i][j] = 0;
+				;
 			}
 		} else {
 			if (livingCells == 3) {

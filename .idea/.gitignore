@@ -6,3 +6,16 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+### IntelliJ IDEA ###
+.idea
+*.iml
+
+*.class
+out/
+HELP.md
+target/
+.mvn/
+/mvn*
+.mvn/wrapper/
+!**/src/main/**/target/
+!**/src/test/**/target/
